@@ -1,0 +1,9 @@
+Añadir un select para cambiar el tema.(Hecho)
+Añadir un select para intercambiar entre libreria de conversion de pdf.
+Añadir un select para cambiar el tamaño de fuente. (Hecho)
+Añadir un boton para limpiar el código. (Hecho)
+Añadir una cookie/localstore para guardar el código de la última sesion.(hecho pero no viable)
+Ponerlo más bonito con alguna librería como bootstrap o tailwind.
+Intentar hacer el cambio de pdf en caliente sin tener que hacer reload de la página. (HECHO)
+Hacer login con base de datos y que la gente guarde sus proyectos
+Hacer atajos de teclado para guardar y formatear

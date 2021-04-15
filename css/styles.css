@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    height: 100%;
+}
+
+main {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+#editor {
+    flex-basis: 100%;
+    border-radius: 5px;
+}
+
+#generarButton,
+#formatButton,#limpiarButton {
+    flex: 1;
+}
+
+.botonera {
+    margin-top: 10px;
+    display: flex;
+}
+
+.pdfSections button {
+    border-radius: 5px;
+    text-decoration: none;
+
+    outline: inherit;
+}
+
+.pdfSections {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.botonera button {
+    border-radius: 10px;
+    background-color: rgb(28, 106, 76);
+    color: white;
+    font-size: 18px;
+    padding: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#divPDF {
+    padding: 10px;
+    background-color: grey;
+    flex: 1;
+}
+
+#divHTML {
+    background-color: grey;
+    padding: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+header {
+    font-size: 11px;
+    padding: 10px;
+    display: flex;
+    background-color: rgb(28, 106, 76);
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.button-active {
+    background-color: rgb(28, 106, 76);
+    color: white;
+}
