@@ -1,4 +1,5 @@
 <?php
+/*
 include('ConvertHTML.php');
 $pdfGenerator = new PDFHTMLGenerator();
 
@@ -11,5 +12,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         break;
 }
+*/
+echo "hola funciona";
 
 ?>
