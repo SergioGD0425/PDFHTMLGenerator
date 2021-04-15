@@ -87,3 +87,9 @@ header {
     background-color: rgb(28, 106, 76);
     color: white;
 }
+
+@media (max-width: 600px) {
+ main{
+     flex-direction: column;
+ }
+}
