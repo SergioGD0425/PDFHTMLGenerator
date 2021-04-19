@@ -18,6 +18,18 @@ let themeSelect = document.getElementById("themeSelect");
 let sizeSelect = document.getElementById("fontSizeNum");
 let myPDF = document.getElementById("myPDF");
 
+//MARGENES PDF
+
+let marginTopInput = document.getElementById("marginTopInput");
+let marginBottomInput = document.getElementById("marginBottomInput");
+let marginLeftInput = document.getElementById("marginLeftInput");
+let marginRightInput = document.getElementById("marginRightInput");
+let fontSizeInput = document.getElementById("fontSizeInput");
+let pdfMode = document.getElementById("pdfMode");
+
+
+
+
 let headerHTML = "";
 let bodyHTML = "";
 let footerHTML = "";
@@ -47,6 +59,7 @@ loadTheme();
 
 function limpiarEditor() {
     codeEditor.setValue("");
+    codeEditor.focus();
 }
 
 function salvarCambios() {
@@ -102,14 +115,22 @@ function enviarHTML() {
     //setCookie("header", headerHTML, 1);
     //setCookie("body", bodyHTML, 1);
     //setCookie("footer", footerHTML, 1);
-
+    console.log(marginTopInput.value);
     $.ajax({
         type: "POST", // la variable type guarda el tipo de la peticion GET,POST,..
         url: "../php/PDFService.php", //url guarda la ruta hacia donde se hace la peticion
         data: {
             header: headerHTML,
             body: bodyHTML,
-            footer: footerHTML
+            footer: footerHTML,
+            params:{
+                marginTop:marginTopInput.value,
+                marginBottom:marginBottomInput.value,
+                marginLeft:marginLeftInput.value,
+                marginRight:marginRightInput.value,
+                fontSize:fontSizeInput.value,
+                mode:pdfMode.value
+            }
         }, // data recive un objeto con la informacion que se enviara al servidor
         success: function (datos) { //success es una funcion que se utiliza si el servidor retorna informacion
             myPDF.src = "data:application/pdf;base64," + datos;

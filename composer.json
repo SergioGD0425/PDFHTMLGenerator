@@ -1,11 +1,7 @@
 {
     "require": {
         "mpdf/mpdf": "^8.0",
-        "silex/silex": "~1.0@dev",
-        "chh/cache-service-provider": "~1.0",
-        "ext-libevent": "*",
-        "ext-curl": "*",
-        "ext-sundown": "*",
-        "php": ">=7.4.9"
+        "php": ">=7.4.9",
+        "yetiforce/yetiforcepdf": "^0.1.32"
     }
 }

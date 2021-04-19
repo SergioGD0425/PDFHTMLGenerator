@@ -1,5 +1,10 @@
 <?php
 
+use Mpdf\Tag\Footer;
+use Mpdf\Tag\Header;
+use YetiForcePDF\Layout\FooterBox;
+use YetiForcePDF\Layout\HeaderBox;
+
 require('../vendor/autoload.php');
 //require_once realpath(__DIR__ . '/..') . '\vendor\autoload.php';
 
@@ -7,22 +12,34 @@ class PDFHTMLGenerator
 {
 
     private $mpdf;
+    private $yetipdf;
+    private $mode;
     private $pdfString;
 
-    function __construct()
+    function __construct($params)
     {
-        $this->mpdf = new \Mpdf\Mpdf([
-            'autoPageBreak' => false,
-            'margin_top' => 30,
-            'margin_bottom' => 20,
-            'margin_left' => 16,
-            'margin_right' => 14,
-            'default_font_size' => 9,
-            'default_font' => 'Arial',
-            'watermark_font' => 'Arial',
-            'watermarkAngle' => 90
-        ]);
+        $this->mode = $params['mode'];
+        if ($this->mode == 'mpdf') {
+            $this->mpdf = new \Mpdf\Mpdf([
+                'autoPageBreak' => false,
+                'margin_top' => $params['marginTop'],
+                'margin_bottom' => $params['marginBottom'],
+                'margin_left' => $params['marginLeft'],
+                'margin_right' => $params['marginRight'],
+                'default_font_size' => $params['fontSize'],
+                'default_font' => 'Arial',
+                'watermark_font' => 'Arial',
+                'watermarkAngle' => 90
+            ]);
+        } else if ($this->mode == 'yetiforce') {
+            $this->yetipdf = (new YetiForcePDF\Document())->init();
+            $this->yetipdf->setDefaultBottomMargin($params['marginBottom']);
+            $this->yetipdf->setDefaultTopMargin($params['marginTop']);
+            $this->yetipdf->setDefaultLeftMargin($params['marginLeft']);
+            $this->yetipdf->setDefaultRightMargin($params['marginRight']);
+        }
     }
+
 
     function generarPdfString($html)
     {
@@ -59,19 +76,29 @@ class PDFHTMLGenerator
         </body>
         
         </html>";
-        $this->mpdf->SetHTMLHeader($html['header'],true);
-        $this->mpdf->SetHTMLFooter($html['footer']);
-        $this->mpdf->WriteHTML($html['body']);
-        //$this->mpdf->AddPage('','','','b','off');
-        
-        $this->pdfString = $this->mpdf->Output('', \Mpdf\Output\Destination::STRING_RETURN);
-        //$this->mpdf->Output('factura.pdf', \Mpdf\Output\Destination::FILE);
+        if ($this->mode == 'mpdf') {
+            $this->mpdf->SetHTMLHeader($html['header'], true);
+            $this->mpdf->SetHTMLFooter($html['footer']);
+            $this->mpdf->WriteHTML($html['body']);
+            //$this->mpdf->AddPage('','','','b','off');
+
+            $this->pdfString = $this->mpdf->Output('', \Mpdf\Output\Destination::STRING_RETURN);
+            //$this->mpdf->Output('factura.pdf', \Mpdf\Output\Destination::FILE);
+        }else if ( $this->mode == 'yetiforce'){
+            $header = "<div data-header>". $html['header']."</div>";
+            $footer = "<div data-footer>". $html['footer']."</div>";
+
+            
+            $this->yetipdf->loadHtml($header.$html['body'].$footer);
+            $this->pdfString = $this->yetipdf->render();
+        }
     }
     function getPDFString()
     {
         return $this->pdfString;
     }
-    function getPDFBase64(){
+    function getPDFBase64()
+    {
         return base64_encode($this->pdfString);
     }
 }

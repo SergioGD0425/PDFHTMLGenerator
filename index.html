@@ -16,6 +16,35 @@
     </header>
     <main>
         <div id="divPDF">
+            <div class="paramsDiv">
+                <div class="paramsInput">
+                    <label>Margin top</label>
+                    <input id="marginTopInput" value="30" type="number">
+                </div>
+                <div class="paramsInput">
+                    <label>Margin bottom</label>
+                    <input id="marginBottomInput" value="20" type="number">
+                </div>
+                <div class="paramsInput">
+                    <label>Margin left</label>
+                    <input id="marginLeftInput" value="16" type="number">
+                </div>
+                <div class="paramsInput">
+                    <label>Margin right</label>
+                    <input id="marginRightInput" value="14" type="number">
+                </div>
+                <div class="paramsInput">
+                    <label>Font size</label>
+                    <input id="fontSizeInput" value="9" type="number">
+                </div>
+                <div class="paramsInput">
+                    <label>Font size</label>
+                    <select id="pdfMode" name="select">
+                        <option value="mpdf">Mpdf</option>
+                        <option value="yetiforce">YetiFocePDF</option>
+                      </select>
+                </div>
+            </div>
             <embed id="myPDF" src="pdf/index.pdf" type="application/pdf" width="100%" height="100%">
         </div>
         <div id="divHTML">
