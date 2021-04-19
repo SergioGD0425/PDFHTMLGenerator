@@ -72,10 +72,7 @@ class PDFHTMLGenerator
                         </tr>
                     </tbody>
                 </table>
-            </div>
-        </body>
-        
-        </html>";
+            </div>";
         if ($this->mode == 'mpdf') {
             $this->mpdf->SetHTMLHeader($html['header'], true);
             $this->mpdf->SetHTMLFooter($html['footer']);
