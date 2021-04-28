@@ -18,19 +18,23 @@ main {
     padding: 40px;
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
+.divConvertidor{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}   
 
 #editor {
     flex-basis: 100%;
-    border-bottom-left-radius: 10px;
+    border-bottom-left-radius: 10px ;
     border-bottom-right-radius: 10px;
-
+    
 }
 
 #generarButton,
-#formatButton,
-#limpiarButton {
+#formatButton,#limpiarButton {
     flex: 1;
 }
 
@@ -65,15 +69,14 @@ main {
     flex: 1;
     flex-direction: column;
 }
-
-#myPDF {
-    border-bottom-left-radius: 10px;
+#myPDF{
+    border-bottom-left-radius: 10px ;
     border-bottom-right-radius: 10px;
     flex-basis: 100%;
-    box-shadow: -1px 11px 20px -1px rgba(0, 0, 0, 0.72);
+    box-shadow: -1px 11px 20px -1px rgba(0,0,0,0.72);
 }
 
-.paramsDiv {
+.paramsDiv{
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     padding: 11px;
@@ -84,17 +87,14 @@ main {
     flex-direction: row;
     flex-wrap: wrap;
 }
-
-.paramsInput {
+.paramsInput{
     padding: 5px;
     display: flex;
     flex-direction: column;
 }
-
-input,
-select {
+input, select{
     max-width: 100px;
-    border: none;
+    border:none;
     -moz-appearance: none;
     text-decoration: none;
     border-radius: 4px;
@@ -108,8 +108,7 @@ select {
     flex-direction: column;
     height: 100%;
 }
-
-.opciones {
+.opciones{
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     padding: 10px;
@@ -133,15 +132,27 @@ header {
     background-color: rgb(11, 61, 42);
     color: white;
 }
+#consoleErrors{
+    border-radius: 10px;
+    margin: 10px;
+    background-color: black;
+    color: white;
+    width: 49%;
+    padding: 10px;
+    display: flex;
+    height: 150px;
+    flex-direction: column;
+    overflow-y: auto;
+}
+.error{
+    color: red;
+}
 
-@media (max-width: 600px) {
-    main {
-        flex-direction: column;
-    }
-
-    #myPDF {
-        min-width: 100%; 
-        width: 100px;
-        *width: 100%; 
-    }
+@media (max-width: 960px) {
+ .divConvertidor{
+     flex-direction: column;
+ }
+ #consoleErrors{
+     width: 100%;
+ }
 }

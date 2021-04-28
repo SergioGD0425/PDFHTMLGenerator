@@ -1,10 +1,5 @@
 <?php
 
-use Mpdf\Tag\Footer;
-use Mpdf\Tag\Header;
-use YetiForcePDF\Layout\FooterBox;
-use YetiForcePDF\Layout\HeaderBox;
-
 require('../vendor/autoload.php');
 //require_once realpath(__DIR__ . '/..') . '\vendor\autoload.php';
 
@@ -82,12 +77,12 @@ class PDFHTMLGenerator
             $this->pdfString = $this->mpdf->Output('', \Mpdf\Output\Destination::STRING_RETURN);
             //$this->mpdf->Output('factura.pdf', \Mpdf\Output\Destination::FILE);
         }else if ( $this->mode == 'yetiforce'){
-            $header = "<div data-header>". $html['header']."</div>";
-            $footer = "<div data-footer>". $html['footer']."</div>";
-
-            
-            $this->yetipdf->loadHtml($header.$html['body'].$footer);
-            $this->pdfString = $this->yetipdf->render();
+                $header = "<div data-header>". $html['header']."</div>";
+                $footer = "<div data-footer>". $html['footer']."</div>";
+    
+                
+                $this->yetipdf->loadHtml($header.$html['body'].$footer);
+                $this->pdfString = $this->yetipdf->render();
         }
     }
     function getPDFString()

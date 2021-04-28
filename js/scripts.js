@@ -115,7 +115,6 @@ function enviarHTML() {
     //setCookie("header", headerHTML, 1);
     //setCookie("body", bodyHTML, 1);
     //setCookie("footer", footerHTML, 1);
-    console.log(marginTopInput.value);
     $.ajax({
         type: "POST", // la variable type guarda el tipo de la peticion GET,POST,..
         url: "../php/PDFService.php", //url guarda la ruta hacia donde se hace la peticion
@@ -123,37 +122,47 @@ function enviarHTML() {
             header: headerHTML,
             body: bodyHTML,
             footer: footerHTML,
-            params:{
-                marginTop:marginTopInput.value,
-                marginBottom:marginBottomInput.value,
-                marginLeft:marginLeftInput.value,
-                marginRight:marginRightInput.value,
-                fontSize:fontSizeInput.value,
-                mode:pdfMode.value
+            params: {
+                marginTop: marginTopInput.value,
+                marginBottom: marginBottomInput.value,
+                marginLeft: marginLeftInput.value,
+                marginRight: marginRightInput.value,
+                fontSize: fontSizeInput.value,
+                mode: pdfMode.value
             }
         }, // data recive un objeto con la informacion que se enviara al servidor
         success: function (datos) { //success es una funcion que se utiliza si el servidor retorna informacion
-            myPDF.src = "data:application/pdf;base64," + datos;
-            //console.log(datos);
+            console.log(datos);
+            datos = JSON.parse(datos);
+            if (datos.success == 1) {
+                myPDF.src = "data:application/pdf;base64," + datos.message;
+            }
+            else if(datos.success == 0){
+                console.log(datos.message)
+            }
         },
         error: function (jqXHR, status, error) { //función error 
-            console.error(error);
+            createError();
         }
     });
 }
 
-function loadTheme(){
-    if(localStorage.getItem("theme")!=null){
-        codeEditor.setTheme("ace/theme/" + localStorage.getItem("theme"));
-        themeSelect.value=localStorage.getItem("theme");
+function createError(){
+    document.getElementById("consoleErrors").appendChild(crearNodo("label","Ha habido un error en el formato, consulte la documentación del convertidor","error"));
+}
 
-    }else{
+function loadTheme() {
+    if (localStorage.getItem("theme") != null) {
+        codeEditor.setTheme("ace/theme/" + localStorage.getItem("theme"));
+        themeSelect.value = localStorage.getItem("theme");
+
+    } else {
         codeEditor.setTheme("ace/theme/eclipse");
     }
 }
 
 function setNewTheme() {
-    localStorage.setItem("theme",themeSelect.value);
+    localStorage.setItem("theme", themeSelect.value);
     codeEditor.setTheme("ace/theme/" + themeSelect.value);
 }
 
@@ -220,4 +229,15 @@ function getCookie(nombre) {
     if (endstr == -1)
         endstr = document.cookie.length;
     return decodeURIComponent(document.cookie.substring(index, endstr));
+}
+
+function crearNodo(tipoElemento, texto, clase) {
+    let nodo = document.createElement(tipoElemento);
+    if (texto != undefined) {
+        let text = document.createTextNode(texto);
+        nodo.appendChild(text);
+    }
+    if (clase != undefined)
+        nodo.className = clase;
+    return nodo;
 }
