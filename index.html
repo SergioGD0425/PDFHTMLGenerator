@@ -6,72 +6,131 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDFHTMLGenerator</title>
-    <link rel="stylesheet" href="./css/styles.css">
+    <!--<link rel="stylesheet" href="./css/styles.css">-->
     <link rel="icon" type="image/png" href="./favicon.ico">
+    <!-- Compiled and minified CSS -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Compiled and minified JavaScript -->
 </head>
 
-<body>
-    <header>
-        <h1>HTML to PDF Generator</h1>
+<body class="h-screen">
+    <header class="bg-red-400 p-4 flex justify-between items-center shadow-xl">
+        <div class="flex items-center">
+            <img src="https://cdn3.iconfinder.com/data/icons/document-icons-2/30/647716-pdf-512.png" class="mr-2"
+                width="50" alt="Logo">
+            <a href="#" class="inline-block p-2 text-white hover:text-red-700 mr-2">Home</a>
+            <a href="#" class="inline-block p-2 text-white hover:text-red-700">About</a>
+        </div>
     </header>
-    <main>
-        <div class="divConvertidor">
-            <div id="divPDF">
-                <div class="paramsDiv">
-                    <div class="paramsInput">
-                        <label>Margin top</label>
-                        <input id="marginTopInput" value="30" type="number">
+    <main class="p-10 flex flex-col bg-red-100 h-screen">
+        <!--CONTENIDO DEL CONVERTIDOR-->
+        <div class="flex-1 flex flex-row">
+            <!--CONTENIDO DEL PDF-->
+            <div id="divPDF" class="flex-1 flex flex-col mr-5 shadow-lg">
+                <!--CONTENIDO DE PARAMETROS DEL PDF-->
+                <div
+                    class="p-4 flex flex-row flex-wrap justify-center bg-red-400 rounded-t-lg border-t-2 border-l-2 border-r-2 border-red-500">
+                    <div class="flex flex-col mr-3">
+                        <label class="text-white">Margin top</label>
+                        <input
+                            class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                            id="marginTopInput" value="30" type="number">
                     </div>
-                    <div class="paramsInput">
-                        <label>Margin bottom</label>
-                        <input id="marginBottomInput" value="20" type="number">
+                    <div class="flex flex-col mr-3 ">
+                        <label class="text-white">Margin bottom</label>
+                        <input
+                            class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                            id="marginBottomInput" value="20" type="number">
                     </div>
-                    <div class="paramsInput">
-                        <label>Margin left</label>
-                        <input id="marginLeftInput" value="16" type="number">
+                    <div class="flex flex-col mr-3">
+                        <label class="text-white">Margin left</label>
+                        <input
+                            class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                            id="marginLeftInput" value="16" type="number">
                     </div>
-                    <div class="paramsInput">
-                        <label>Margin right</label>
-                        <input id="marginRightInput" value="14" type="number">
+                    <div class="flex flex-col mr-3">
+                        <label class="text-white">Margin right</label>
+                        <input
+                            class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                            id="marginRightInput" value="14" type="number">
                     </div>
-                    <div class="paramsInput">
-                        <label>Font size</label>
-                        <input id="fontSizeInput" value="9" type="number">
+                    <div class="flex flex-col mr-3">
+                        <label class="text-white">Font size</label>
+                        <input
+                            class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                            id="fontSizeInput" value="9" type="number">
                     </div>
-                    <div class="paramsInput">
-                        <label>Conversor</label>
-                        <select id="pdfMode" name="select">
-                            <option value="mpdf">Mpdf</option>
+                    <div class="flex flex-col mr-3">
+                        <label class="text-white">Conversor</label>
+                        <select
+                            class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                            id="pdfMode" name="select">
+                            <option class="rounded" value="mpdf">Mpdf</option>
                             <option value="yetiforce">YetiFocePDF</option>
                         </select>
                     </div>
                 </div>
-                <embed id="myPDF" src="pdf/index.pdf" type="application/pdf" width="100%" height="100%">
-            </div>
-            <div id="divHTML">
-                <div class="opciones">
-                    <select id="themeSelect" name="themes">
+                <embed class="border-l-2 border-r-2 border-red-500 h-full" id="myPDF" src="pdf/index.pdf"
+                    type="application/pdf" width="100%" height="100%">
 
-                    </select>
-                    <input type="number" id="fontSizeNum" value="12" min="0" max="64" onKeyDown="return false">
-                    <div class="pdfSections">
-                        <button class="button-active" id="headerButton">Header</button>
-                        <button id="bodyButton">Body</button>
-                        <button id="footerButton">Footer</button>
+                <div class="overflow-y-auto p-2 h-1/6 flex flex-col bg-black rounded-b-lg border-l-2 border-b-2 border-t  border-r-2 border-red-500"
+                    >
+                    <label class="text-white border p-1 rounded-md self-start">Consola de errores</label>
+                    <div id="consoleErrors" class="text-red-500 flex flex-col">
+
                     </div>
                 </div>
-                <div id="editor"></div>
-                <div class="botonera">
-                    <button id="generarButton">Generar PDF</button>
-                    <button id="formatButton">Formatear código</button>
-                    <button id="limpiarButton">Limpiar editor</button>
+            </div>
+            <div id="divHTML" class="flex flex-col flex-1 shadow-lg">
+                <div class="bg-red-400 p-5 rounded-t-lg flex-col flex border-t-2 border-l-2 border-r-2 border-red-500">
+                    <div class="flex flex-row flex-wrap">
+                        <select
+                            class="mr-3 mb-2 flex-1 shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                            id="themeSelect" name="themes">
+
+                        </select>
+                        <input
+                            class="mb-2 flex-1 shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                            type="number" id="fontSizeNum" value="12" min="0" max="64" onKeyDown="return false">
+                    </div>
+                    <div class="mt-8 flex flex-row flex-wrap">
+                        <button
+                            class="rounded-md mr-2 bg-red-100 flex-1 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500"
+                            id="headerButton">Header</button>
+                        <button
+                            class="rounded-md mr-2 bg-red-100 flex-1 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500"
+                            id="bodyButton">Body</button>
+                        <button
+                            class="rounded-md mr-2 bg-red-100 flex-1 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500"
+                            id="footerButton">Footer</button>
+                    </div>
+                </div>
+                <div class="h-full border-l-2  border-r-2 border-red-500" id="editor"></div>
+                <div
+                    class="p-4 flex flex-row flex-wrap justify-center rounded-b-lg bg-red-400 border-r-2 border-b-2 border-l-2 border-red-500">
+                    <button
+                        class="rounded-md mr-2 bg-red-100 flex-1 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500"
+                        id="generarButton">Generar PDF</button>
+                    <button
+                        class="rounded-md mr-2 bg-red-100 flex-1 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500"
+                        id="formatButton">Formatear código</button>
+                    <button
+                        class="rounded-md mr-2 bg-red-100 flex-1 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500"
+                        id="limpiarButton">Limpiar editor</button>
                 </div>
             </div>
         </div>
-        <div id="consoleErrors">
-            <label>Consola de errores</label>
-        </div>
+        
     </main>
+
+    <footer class="bg-red-500">
+        <h3>Enjoy the PDFHTMLGenerator!</h3>
+
+        <div>
+            Copyright &copy; PDFHTMLGenerator 2021
+        </div>
+    </footer>
 
     <script src="./js/ace/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="./js/ace/mode-html.js" type="text/javascript" charset="utf-8"></script>
