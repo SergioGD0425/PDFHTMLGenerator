@@ -13,12 +13,15 @@ document.getElementById("headerButton").addEventListener("click", () => cambiarC
 document.getElementById("bodyButton").addEventListener("click", () => cambiarContenidoEditor("body"));
 document.getElementById("footerButton").addEventListener("click", () => cambiarContenidoEditor("footer"));
 
+document.getElementById("showParams").addEventListener("click", showParams);
+
 
 let themeSelect = document.getElementById("themeSelect");
 let sizeSelect = document.getElementById("fontSizeNum");
 let myPDF = document.getElementById("myPDF");
 
 //MARGENES PDF
+let divPDF = document.getElementById("divPDF");
 
 let marginTopInput = document.getElementById("marginTopInput");
 let marginBottomInput = document.getElementById("marginBottomInput");
@@ -26,8 +29,7 @@ let marginLeftInput = document.getElementById("marginLeftInput");
 let marginRightInput = document.getElementById("marginRightInput");
 let fontSizeInput = document.getElementById("fontSizeInput");
 let pdfMode = document.getElementById("pdfMode");
-
-
+let showPDFMobile = document.getElementById("showPDFMobile");
 
 
 let headerHTML = "";
@@ -57,6 +59,14 @@ generarThemesSelect();
 //cargarCookies();
 loadTheme();
 
+function showParams() {
+    if (divPDF.classList.contains("hidden")) {
+        divPDF.classList.remove("hidden");
+    } else {
+        divPDF.classList.add("hidden");
+    }
+}
+
 function limpiarEditor() {
     codeEditor.setValue("");
     codeEditor.focus();
@@ -74,12 +84,19 @@ function salvarCambios() {
 
 function addActiveClass(cambioEditor) {
     document.getElementById(cambioEditor + "Button").classList.add("button-active");
+    document.getElementById(cambioEditor + "Button").classList.add("bg-red-600");
+    document.getElementById(cambioEditor + "Button").classList.add("text-white");
+
 }
 
 function removeActiveClass() {
-    document.getElementsByClassName("button-active")[0].classList.remove("button-active");
-
+    if (document.getElementsByClassName("button-active")[0] != undefined) {
+        document.getElementsByClassName("button-active")[0].classList.remove("bg-red-600");
+        document.getElementsByClassName("button-active")[0].classList.remove("text-white"); 
+        document.getElementsByClassName("button-active")[0].classList.remove("button-active");
+    }
 }
+
 
 function cambiarContenidoEditor(cambioEditor) {
     salvarCambios();
@@ -132,14 +149,12 @@ function enviarHTML() {
             }
         }, // data recive un objeto con la informacion que se enviara al servidor
         success: function (datos) { //success es una funcion que se utiliza si el servidor retorna informacion
-            console.log(datos);
             datos = JSON.parse(datos);
-            if (datos.success == 1) {
-                myPDF.src = "data:application/pdf;base64," + datos.message;
-            }
-            else if(datos.success == 0){
-                console.log(datos.message)
-            }
+
+            myPDF.src = "data:application/pdf;base64," + datos.message;
+            showPDFMobile.href = "data:application/pdf;base64," + datos.message;
+            
+
         },
         error: function (jqXHR, status, error) { //función error 
             createError();
@@ -147,8 +162,8 @@ function enviarHTML() {
     });
 }
 
-function createError(){
-    document.getElementById("consoleErrors").appendChild(crearNodo("label","Ha habido un error en el formato, consulte la documentación del convertidor","error"));
+function createError() {
+    document.getElementById("consoleErrors").appendChild(crearNodo("label", "Ha habido un error en el formato, consulte la documentación del convertidor", "error"));
 }
 
 function loadTheme() {
