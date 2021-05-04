@@ -14,6 +14,7 @@ document.getElementById("bodyButton").addEventListener("click", () => cambiarCon
 document.getElementById("footerButton").addEventListener("click", () => cambiarContenidoEditor("footer"));
 
 document.getElementById("showParams").addEventListener("click", showParams);
+document.getElementById("showPDFMobile").addEventListener("click", loadPDFMobile);
 
 
 let themeSelect = document.getElementById("themeSelect");
@@ -29,8 +30,7 @@ let marginLeftInput = document.getElementById("marginLeftInput");
 let marginRightInput = document.getElementById("marginRightInput");
 let fontSizeInput = document.getElementById("fontSizeInput");
 let pdfMode = document.getElementById("pdfMode");
-let showPDFMobile = document.getElementById("showPDFMobile");
-
+let base64 = '';
 
 let headerHTML = "";
 let bodyHTML = "";
@@ -56,8 +56,14 @@ document.getElementById('editor').style.fontSize = '12px';
 editorLib.init();
 codeEditor.resize();
 generarThemesSelect();
-//cargarCookies();
 loadTheme();
+
+function loadPDFMobile() {
+    let pdfWindow = window.open("")
+    pdfWindow.document.write(
+        "<iframe width='100%' height='100%' src='data:application/pdf;base64, " + base64 + "'></iframe>"
+    )
+}
 
 function showParams() {
     if (divPDF.classList.contains("hidden")) {
@@ -92,7 +98,7 @@ function addActiveClass(cambioEditor) {
 function removeActiveClass() {
     if (document.getElementsByClassName("button-active")[0] != undefined) {
         document.getElementsByClassName("button-active")[0].classList.remove("bg-red-600");
-        document.getElementsByClassName("button-active")[0].classList.remove("text-white"); 
+        document.getElementsByClassName("button-active")[0].classList.remove("text-white");
         document.getElementsByClassName("button-active")[0].classList.remove("button-active");
     }
 }
@@ -113,25 +119,11 @@ function cambiarContenidoEditor(cambioEditor) {
     addActiveClass(cambioEditor);
 }
 
-function cargarCookies() {
-    if (getCookie("header") != null) {
-        //headerHTML = getCookie("header");
-        codeEditor.setValue(headerHTML);
-    }
-    if (getCookie("body") != null) {
-        bodyHTML = getCookie("body");
-    }
-    if (getCookie("footer") != null) {
-        footerHTML = getCookie("footer");
-    }
-    codeEditor.focus();
-}
+
 
 function enviarHTML() {
     salvarCambios();
-    //setCookie("header", headerHTML, 1);
-    //setCookie("body", bodyHTML, 1);
-    //setCookie("footer", footerHTML, 1);
+
     $.ajax({
         type: "POST", // la variable type guarda el tipo de la peticion GET,POST,..
         url: "../php/PDFService.php", //url guarda la ruta hacia donde se hace la peticion
@@ -152,8 +144,8 @@ function enviarHTML() {
             datos = JSON.parse(datos);
 
             myPDF.src = "data:application/pdf;base64," + datos.message;
-            showPDFMobile.href = "data:application/pdf;base64," + datos.message;
-            
+            base64=datos.message;
+
 
         },
         error: function (jqXHR, status, error) { //función error 
@@ -226,24 +218,6 @@ function limpiarSeparadores(text) {
 function beautifyCode() {
     var beautify = ace.require("ace/ext/beautify"); // get reference to extension
     beautify.beautify(codeEditor.session);
-}
-
-
-function setCookie(nombre, value, dias) {
-    var expdate = new Date();
-    expdate.setTime(expdate.getTime() + 10000000);
-    document.cookie = nombre + "=" + encodeURIComponent(value) + "; expires=" + expdate.toUTCString();
-}
-
-function getCookie(nombre) {
-    var index = document.cookie.indexOf(nombre + "=");
-    if (index == -1)
-        return null;
-    index = document.cookie.indexOf("=", index) + 1;
-    var endstr = document.cookie.indexOf(";", index);
-    if (endstr == -1)
-        endstr = document.cookie.length;
-    return decodeURIComponent(document.cookie.substring(index, endstr));
 }
 
 function crearNodo(tipoElemento, texto, clase) {
