@@ -20,18 +20,18 @@
             <img src="https://cdn3.iconfinder.com/data/icons/document-icons-2/30/647716-pdf-512.png" class="mr-2"
                 width="50" alt="Logo">
             <a href="#" class="inline-block p-2 text-white hover:text-red-700 mr-2">Home</a>
-            <a href="#" class="inline-block p-2 text-white hover:text-red-700">About</a>
+            <!--<a href="#" class="inline-block p-2 text-white hover:text-red-700">About</a>-->
         </div>
     </header>
     <main class="p-10 flex flex-col bg-red-100 h-screen">
         <div class="flex md:hidden">
             <button id="showParams"
                 class="mr-2 px-1 flex-1 rounded-md mb-2  bg-red-400 justify-center hover:bg-red-600 text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500">
-                Mostrar parámetros
+                Show params
             </button>
             <button id="showPDFMobile"
                 class="flex-1 text-center px-1 rounded-md mb-2  bg-red-400 justify-center hover:bg-red-600 text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500">
-                Visualizar PDF
+                Show Pdf
             </button>
         </div>
         <!--CONTENIDO DEL CONVERTIDOR-->
@@ -39,7 +39,7 @@
         <div class="flex-col flex-1 flex md:flex-row">
             <!--CONTENIDO DEL PDF-->
             <div id="divPDF"
-                class="flex-1 flex flex-col md:mr-5 md:shadow-lg hidden transition-all duration-500 md:flex">
+                class="flex-1 overflow-hidden flex flex-col md:mr-5 md:shadow-lg hidden transition-all duration-500 md:flex">
                 <!--CONTENIDO DE PARAMETROS DEL PDF-->
                 <div class="rounded-b-lg border-b-2 p-4 md:border-b-0 md:rounded-b-none flex flex-row flex-wrap justify-center bg-red-400 rounded-t-lg border-t-2 border-l-2 border-r-2 border-red-500">
                     <div class="flex flex-col mr-3">
@@ -82,12 +82,12 @@
                         </select>
                     </div>
                 </div>
-                <embed class="hidden md:block border-l-2 border-r-2 border-red-500 h-full" id="myPDF"
+                <embed class="hidden md:flex border-l-2 border-r-2 border-red-500 h-full" id="myPDF"
                     src="pdf/index.pdf" type="application/pdf" width="100%" height="100%">
 
                 <div
-                    class="hidden md:block overflow-y-auto p-2 h-1/6 flex flex-col bg-black rounded-b-lg border-l-2 border-b-2 border-t  border-r-2 border-red-500">
-                    <label class="text-white border p-1 rounded-md self-start">Consola de errores</label>
+                    class="hidden md:flex overflow-y-auto p-2 h-1/6 flex flex-col bg-black rounded-b-lg border-l-2 border-b-2 border-t  border-r-2 border-red-500">
+                    <label class="text-white border p-1 rounded-md self-start">Console of errors</label>
                     <div id="consoleErrors" class="text-red-500 flex flex-col">
 
                     </div>
@@ -122,25 +122,27 @@
                     class="p-4 flex flex-row flex-wrap justify-center rounded-b-lg bg-red-400 border-r-2 border-b-2 border-l-2 border-red-500">
                     <button
                         class="mb-1 rounded-md mr-2 bg-red-100 flex-1 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500"
-                        id="generarButton">Generar PDF</button>
+                        id="generarButton">Generate PDF</button>
                     <button
                         class="mb-1  rounded-md mr-2 bg-red-100 flex-1 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500"
-                        id="formatButton">Formatear código</button>
+                        id="formatButton">Format code</button>
                     <button
                         class="mb-1 rounded-md mr-2 bg-red-100 flex-1 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500"
-                        id="limpiarButton">Limpiar editor</button>
+                        id="limpiarButton">Clear editor</button>
                 </div>
             </div>
         </div>
 
     </main>
 
-    <footer class="bg-red-500">
-        <h3>Enjoy the PDFHTMLGenerator!</h3>
+    <footer class="bg-red-500 flex flex-col justify-center p-5">
+        <h3 class="text-white self-center">Enjoy the PDFHTMLGenerator!</h3>
 
-        <div>
+        <div class="text-white self-center">
             Copyright &copy; PDFHTMLGenerator 2021
         </div>
+        <a class="text-white self-center border-b-2 border-white" href="https://sgardeldev.codes/">sgardeldev.codes</a>
+        <a class="self-center" href="https://tailwindcss.com/"><img class="h-12 w-12" src="https://cdn.worldvectorlogo.com/logos/tailwindcss.svg"/></a>
     </footer>
 
     <script src="./js/ace/ace.js" type="text/javascript" charset="utf-8"></script>
