@@ -155,6 +155,12 @@ function enviarHTML() {
 }
 
 function createError() {
+    let parentError = document.getElementById("consoleErrors").parentElement;
+    if(parentError.classList.contains('hidden')){
+        parentError.classList.remove("hidden");
+        myPDF.classList.remove('border-b-2');
+        myPDF.classList.remove('rounded-b-lg');
+    }
     document.getElementById("consoleErrors").appendChild(crearNodo("label", "Ha habido un error en el formato, consulte la documentación del convertidor", "error"));
 }
 
