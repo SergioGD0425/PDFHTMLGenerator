@@ -93,6 +93,12 @@ var PageFunctions = {
         codeEditor.focus();
         PageFunctions.addActiveClass(cambioEditor);
     },
+    loadPDFMobile: function () {
+        let pdfWindow = window.open("")
+        pdfWindow.document.write(
+            "<iframe width='100%' height='100%' src='data:application/pdf;base64, " + PDF.base64 + "'></iframe>"
+        )
+    },
     enviarHTML: function () {
         PageFunctions.salvarCambios();
         $.ajax({
@@ -116,6 +122,10 @@ var PageFunctions = {
 
                 PDF.myPDF.src = "data:application/pdf;base64," + datos.message;
                 PDF.base64 = datos.message;
+                console.log(window.innerWidth);
+                if (window.innerWidth<=768) {
+                    PageFunctions.loadPDFMobile();
+                }
             },
             error: function (jqXHR, status, error) { //función error 
                 PageFunctions.createError();
@@ -223,12 +233,7 @@ codeEditor.resize();
 PageFunctions.generarThemesSelect();
 
 
-function loadPDFMobile() {
-    let pdfWindow = window.open("")
-    pdfWindow.document.write(
-        "<iframe width='100%' height='100%' src='data:application/pdf;base64, " + PDF.base64 + "'></iframe>"
-    )
-}
+
 
 function showParams() {
     if (PDF.divPDF.classList.contains("hidden")) {
