@@ -1,20 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Cache;
-
 include('ConvertHTML.php');
 
 ini_set('display_errors',0);
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'POST':
         try{
-
-        
-            $pdfGenerator = new PDFHTMLGenerator($_POST['params']);
-
-            $pdfGenerator->generarPdfString($_POST);
+            $pdfGenerator = new PDFHTMLGenerator($_POST['params']);  
             $respuesta = [
-                'message' => $pdfGenerator->getPDFBase64(),
+                'message' => base64_encode($pdfGenerator->getPDFString($_POST)),
                 'success' => 1
             ];
         }catch( Exception $e){
@@ -24,13 +18,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
             ];
         }
             echo json_encode($respuesta);
-
-           /* $respuesta = [
-                'message' => "Se ha producido un error, revise la documentación del conversor",
-                'success' => 0
-            ];
-            echo json_encode($respuesta);
-            */
         break;
     case 'GET':
 

@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+}
+#divParams{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: hidden;
+    transition: all 1 linear;
+    max-height: 0;
+    padding: 0px;
+    /*transition: all 0.5s linear;*/
+
+    &.animarParams{
+        padding: 15px;
+        max-height: 100%;
+        /*transition: all 0.5s linear;*/
+    }
+}
+#divActions{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-height: 0;
+    overflow: hidden;
+    /*transition: all 0.5s linear;*/
+    &.animarActions{
+        padding: 15px;
+        max-height: 100%;
+        /*transition: all 0.5s linear;*/
+    }
+}
+.cross{
+    transform: rotate(45deg);
+    transition: all 0.5s ease-in-out;
+    &.animatedCross{
+        transition: all 0.5s ease-in-out;
+        transform: rotate(0);
+    }
+}

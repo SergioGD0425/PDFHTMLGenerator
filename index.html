@@ -2,14 +2,35 @@
 <html lang="en">
 
 <head>
+    <!-- Primary Meta Tags -->
+    <title>PDFHTMLGenerator</title>
+    <meta name="title" content="PDFHTMLGenerator">
+    <meta name="description" content="A live tool to develop PDF templates by html code.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://pdf.sgardeldev.codes/">
+    <meta property="og:title" content="PDFHTMLGenerator">
+    <meta property="og:description" content="A live tool to develop PDF templates by html code.">
+    <meta property="og:image" content="./assets/pdfgenerator.PNG">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="http://pdf.sgardeldev.codes/">
+    <meta property="twitter:title" content="PDFHTMLGenerator">
+    <meta property="twitter:description" content="A live tool to develop PDF templates by html code.">
+    <meta property="twitter:image" content="./assets/pdfgenerator.PNG">
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDFHTMLGenerator</title>
-    <!--<link rel="stylesheet" href="./css/styles.css">-->
+    <link rel="stylesheet" href="./css/styles.css">
     <link rel="icon" type="image/png" href="./favicon.ico">
     <!-- Compiled and minified CSS -->
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" />
 
     <!-- Compiled and minified JavaScript -->
 </head>
@@ -19,11 +40,88 @@
         <div class="flex items-center">
             <img src="https://cdn3.iconfinder.com/data/icons/document-icons-2/30/647716-pdf-512.png" class="mr-2"
                 width="50" alt="Logo">
-            <a href="#" class="inline-block p-2 text-white hover:text-red-700 mr-2">Home</a>
-            <!--<a href="#" class="inline-block p-2 text-white hover:text-red-700">About</a>-->
+            <a href="." class="inline-block p-2 text-white hover:text-red-700 mr-2">Home</a>
         </div>
     </header>
-    <main class="p-10 flex flex-col bg-red-100 h-screen">
+    <main class="flex flex-col bg-red-100 h-screen">
+        <!--CONTENIDO DE PARAMETROS DEL PDF-->
+        <div class="flex flex-col cursor-pointer bg-red-600 text-white bg-red-100 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500"
+            id="deployParams">
+            <div class="flex justify-between p-1 px-5"><label class="self-center cursor-pointer">Params</label><i
+                    class="fas fa-times cross self-center"></i></div>
+        </div>
+        <div id="divParams" class="flex flex-row bg-red-400 border-b-2 border-red-500">
+            <div class="flex flex-1 flex-col mr-3 max-w-xs">
+                <label class="text-white">Margin top</label>
+                <input
+                    class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                    id="marginTopInput" value="30" type="number">
+            </div>
+            <div class="flex flex-1 flex-col mr-3 max-w-xs">
+                <label class="text-white">Margin bottom</label>
+                <input
+                    class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                    id="marginBottomInput" value="20" type="number">
+            </div>
+            <div class="flex flex-1 flex-col mr-3 max-w-xs">
+                <label class="text-white">Margin left</label>
+                <input
+                    class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                    id="marginLeftInput" value="16" type="number">
+            </div>
+            <div class="flex flex-1 flex-col mr-3 max-w-xs">
+                <label class="text-white">Margin right</label>
+                <input
+                    class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                    id="marginRightInput" value="14" type="number">
+            </div>
+            <div class="flex flex-1 flex-col mr-3 max-w-xs">
+                <label class="text-white">Font size</label>
+                <input
+                    class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                    id="fontSizeInput" value="9" type="number">
+            </div>
+            <div class="flex flex-1 flex-col mr-3 max-w-xs">
+                <label class="text-white">Conversor</label>
+                <select
+                    class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                    id="pdfMode" name="select">
+                    <option class="rounded" value="mpdf">Mpdf</option>
+                    <option value="yetiforce">YetiFocePDF</option>
+                </select>
+            </div>
+            <div class="flex flex-1 flex-col mr-3 max-w-xs">
+                <label class="text-white">Themes</label>
+                <select
+                    class="wshadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                    id="themeSelect" name="themes">
+
+                </select>
+            </div>
+            <div class="flex flex-1 flex-col mr-3 max-w-xs">
+                <label class="text-white">Editor Font size</label>
+                <input
+                    class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                    type="number" id="fontSizeNum" value="12">
+            </div>
+        </div>
+        <div class="flex flex-col cursor-pointer bg-red-600 text-white bg-red-100 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500"
+            id="deployActions">
+            <div class="flex justify-between p-1 px-5"><label class="self-center cursor-pointer">Actions</label><i
+                    class="fas fa-times cross self-center"></i></div>
+        </div>
+        <div id="divActions" class="flex flex-row flex-wrap justify-center bg-red-400  border-b-2 border-red-500">
+            <button
+                class="mb-1 rounded-md mr-2 bg-red-100 self-center flex-1 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500"
+                id="generarButton">Generate PDF</button>
+            <button
+                class="mb-1  rounded-md mr-2 bg-red-100 self-center flex-1 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500"
+                id="formatButton">Format code</button>
+            <button
+                class="mb-1 rounded-md mr-2 bg-red-100 self-center flex-1 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500"
+                id="limpiarButton">Clear editor</button>
+        </div>
+        <!--
         <div class="flex md:hidden">
             <button id="showParams"
                 class="mr-2 px-1 flex-1 rounded-md mb-2  bg-red-400 justify-center hover:bg-red-600 text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500">
@@ -33,59 +131,19 @@
                 class="flex-1 text-center px-1 rounded-md mb-2  bg-red-400 justify-center hover:bg-red-600 text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500">
                 Show Pdf
             </button>
-        </div>
-        <!--CONTENIDO DEL CONVERTIDOR-->
+        </div>-->
 
-        <div class="flex-col flex-1 flex md:flex-row">
+        <!--CONTENIDO DEL CONVERTIDOR-->
+        <div class="p-10 flex-col flex-1 flex md:flex-row">
             <!--CONTENIDO DEL PDF-->
             <div id="divPDF"
                 class="flex-1 overflow-hidden flex flex-col md:mr-5 md:shadow-lg hidden transition-all duration-500 md:flex">
-                <!--CONTENIDO DE PARAMETROS DEL PDF-->
-                <div class="rounded-b-lg border-b-2 p-4 md:border-b-0 md:rounded-b-none flex flex-row flex-wrap justify-center bg-red-400 rounded-t-lg border-t-2 border-l-2 border-r-2 border-red-500">
-                    <div class="flex flex-col mr-3">
-                        <label class="text-white">Margin top</label>
-                        <input
-                            class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
-                            id="marginTopInput" value="30" type="number">
-                    </div>
-                    <div class="flex flex-col mr-3 ">
-                        <label class="text-white">Margin bottom</label>
-                        <input
-                            class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
-                            id="marginBottomInput" value="20" type="number">
-                    </div>
-                    <div class="flex flex-col mr-3">
-                        <label class="text-white">Margin left</label>
-                        <input
-                            class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
-                            id="marginLeftInput" value="16" type="number">
-                    </div>
-                    <div class="flex flex-col mr-3">
-                        <label class="text-white">Margin right</label>
-                        <input
-                            class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
-                            id="marginRightInput" value="14" type="number">
-                    </div>
-                    <div class="flex flex-col mr-3">
-                        <label class="text-white">Font size</label>
-                        <input
-                            class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
-                            id="fontSizeInput" value="9" type="number">
-                    </div>
-                    <div class="flex flex-col mr-3">
-                        <label class="text-white">Conversor</label>
-                        <select
-                            class="shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
-                            id="pdfMode" name="select">
-                            <option class="rounded" value="mpdf">Mpdf</option>
-                            <option value="yetiforce">YetiFocePDF</option>
-                        </select>
-                    </div>
-                </div>
-                <embed class="hidden md:flex border-b-2 rounded-b-lg  border-l-2 border-r-2 border-red-500 h-full" id="myPDF"
-                    src="pdf/index.pdf" type="application/pdf" width="100%" height="100%">
 
-                <div class="hidden overflow-y-auto p-2 h-1/6 flex flex-col bg-black rounded-b-lg border-l-2 border-b-2 border-t  border-r-2 border-red-500">
+                <embed class="hidden md:flex border-b-2 border-t-2 rounded-b-lg rounded-t-lg border-l-2 border-r-2 border-red-500 h-full"
+                    id="myPDF" src="pdf/index.pdf" type="application/pdf" width="100%" height="100%">
+
+                <div
+                    class="hidden overflow-y-auto p-2 h-1/6 flex flex-col bg-black rounded-b-lg border-l-2 border-b-2 border-t  border-r-2 border-red-500">
                     <label class="text-white border p-1 rounded-md self-start">Console of errors</label>
                     <div id="consoleErrors" class="text-red-500 flex flex-col">
 
@@ -95,16 +153,6 @@
             <div id="divHTML" class="flex flex-col flex-1 shadow-lg">
                 <div class="bg-red-400 p-5 rounded-t-lg flex-col flex border-t-2 border-l-2 border-r-2 border-red-500">
                     <div class="flex flex-row flex-wrap">
-                        <select
-                            class="mr-3 mb-2 flex-1 shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
-                            id="themeSelect" name="themes">
-
-                        </select>
-                        <input
-                            class="mb-2 flex-1 shadow-lg rounded-sm pl-2 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
-                            type="number" id="fontSizeNum" value="12" min="0" max="64">
-                    </div>
-                    <div class="mt-8 flex flex-row flex-wrap">
                         <button
                             class="button-active bg-red-600 text-white rounded-md mr-2 bg-red-100 flex-1 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500"
                             id="headerButton">Header</button>
@@ -116,19 +164,7 @@
                             id="footerButton">Footer</button>
                     </div>
                 </div>
-                <div class="h-full border-l-2  border-r-2 border-red-500" id="editor"></div>
-                <div
-                    class="p-4 flex flex-row flex-wrap justify-center rounded-b-lg bg-red-400 border-r-2 border-b-2 border-l-2 border-red-500">
-                    <button
-                        class="mb-1 rounded-md mr-2 bg-red-100 flex-1 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500"
-                        id="generarButton">Generate PDF</button>
-                    <button
-                        class="mb-1  rounded-md mr-2 bg-red-100 flex-1 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500"
-                        id="formatButton">Format code</button>
-                    <button
-                        class="mb-1 rounded-md mr-2 bg-red-100 flex-1 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors duration-500"
-                        id="limpiarButton">Clear editor</button>
-                </div>
+                <div class="h-full border-l-2  border-r-2 border-red-500 border-b-2 rounded-b-lg" id="editor"></div>
             </div>
         </div>
 
@@ -141,7 +177,8 @@
             Copyright &copy; PDFHTMLGenerator 2021
         </div>
         <a class="text-white self-center border-b-2 border-white" href="https://sgardeldev.codes/">sgardeldev.codes</a>
-        <a class="self-center" href="https://tailwindcss.com/"><img class="h-12 w-12" src="https://cdn.worldvectorlogo.com/logos/tailwindcss.svg"/></a>
+        <a class="self-center" href="https://tailwindcss.com/"><img class="h-12 w-12"
+                src="https://cdn.worldvectorlogo.com/logos/tailwindcss.svg" /></a>
     </footer>
 
     <script src="./js/ace/ace.js" type="text/javascript" charset="utf-8"></script>
