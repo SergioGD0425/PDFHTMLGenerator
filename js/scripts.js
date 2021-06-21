@@ -231,14 +231,3 @@ document.getElementById('editor').style.fontSize = '12px';
 editorLib.init();
 codeEditor.resize();
 PageFunctions.generarThemesSelect();
-
-
-
-
-function showParams() {
-    if (PDF.divPDF.classList.contains("hidden")) {
-        PDF.divPDF.classList.remove("hidden");
-    } else {
-        PDF.divPDF.classList.add("hidden");
-    }
-}
